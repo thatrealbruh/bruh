@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    html, body {
+      height: 100%;
+      font-family: 'Courier New', monospace;
+      background-color: black;
+      color: white;
+      overflow: hidden;
+    }
+
+    #intro {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 1s ease;
+      z-index: 10;
+    }
+
+    #interact-btn {
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #interact-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    #main-content {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <h1>Welcome.</h1>
+    <p>Click to Interact</p>
+    <button id="interact-btn">▶ Interact</button>
+  </div>
+
+  <audio id="bg-music" loop>
+    <source src="your-song.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="main-content">
+    <h2>✨ About Me ✨</h2>
+    <p>Hi, I'm [your name]! This is my cozy corner of the internet.</p>
+    <!-- Add your links, profile pic, whatever here -->
+  </div>
+
+  <script>
+    const btn = document.getElementById('interact-btn');
+    const intro = document.getElementById('intro');
+    const content = document.getElementById('main-content');
+    const music = document.getElementById('bg-music');
+
+    btn.addEventListener('click', () => {
+      music.play();
+      intro.classList.add('fade-out');
+      setTimeout(() => {
+        intro.style.display = 'none';
+        content.style.display = 'block';
+        document.body.style.overflow = 'auto';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
