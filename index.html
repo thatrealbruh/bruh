@@ -365,31 +365,20 @@
         setTimeout(() => {
           intro.style.display = 'none';
           main.style.display = 'flex';
-          document.body.style.overflow = 'auto';
         }, 1000);
-      }, 300);
+      }, 500);
     });
 
-    // ⏰ Clock Function
     function updateClock() {
-      const clock = document.getElementById('clock');
       const now = new Date();
-      const time = now.toLocaleTimeString('en-US', { hour12: false });
-      clock.textContent = `${time}`;
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const timeString = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('clock').textContent = timeString;
     }
 
     setInterval(updateClock, 1000);
-    updateClock();
-
-    // 🔒 Coming Soon Shake Effect
-    document.querySelectorAll('.social-icons a.locked').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        link.classList.add('shake');
-        alert("🔒 Coming soon");
-        setTimeout(() => link.classList.remove('shake'), 500);
-      });
-    });
   </script>
 
 </body>
