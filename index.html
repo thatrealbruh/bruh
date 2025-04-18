@@ -80,27 +80,63 @@
       border: 2px solid white;
     }
 
-    .board h2 {
-      margin-top: -10px;
-      margin-bottom: 10px;
-    }
-
-    .wave-text {
-      display: inline-block;
-      font-size: 2.2rem;
-      animation: wave 2s infinite ease-in-out;
+    .glitch-text {
+      position: relative;
+      font-size: 2.8rem;
       color: #ff66cc;
+      font-weight: bold;
+      font-family: monospace;
       text-shadow:
         0 0 5px #fff,
         0 0 10px #f0f,
         0 0 20px #f0f;
+      animation: flicker 2s infinite alternate;
     }
 
-    @keyframes wave {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(1.5deg); }
-      50% { transform: rotate(-1.5deg); }
-      75% { transform: rotate(1.5deg); }
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      color: #0ff;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .glitch-text::before {
+      animation: glitchTop 2s infinite linear alternate-reverse;
+      color: #f0f;
+    }
+
+    .glitch-text::after {
+      animation: glitchBottom 2s infinite linear alternate-reverse;
+      color: #0ff;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 22%, 24%, 55% {
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(0, 9999px, 50px, 0); left: 2px; }
+      20% { clip: rect(0, 9999px, 10px, 0); left: -2px; }
+      30% { clip: rect(0, 9999px, 80px, 0); left: 3px; }
+      100% { clip: rect(0, 9999px, 0, 0); left: 0; }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(80px, 9999px, 9999px, 0); left: -2px; }
+      20% { clip: rect(50px, 9999px, 9999px, 0); left: 1px; }
+      30% { clip: rect(90px, 9999px, 9999px, 0); left: -1px; }
+      100% { clip: rect(0, 9999px, 0, 0); left: 0; }
     }
 
     .social-icons {
@@ -110,7 +146,12 @@
       margin-top: 20px;
     }
 
-    .social-icons a img {
+    .social-icons a {
+      position: relative;
+      display: inline-block;
+    }
+
+    .social-icons img {
       width: 32px;
       height: 32px;
       transition: transform 0.2s ease;
@@ -120,6 +161,15 @@
     .social-icons a:hover img {
       transform: scale(1.2);
       filter: drop-shadow(0 0 15px #ffffff);
+    }
+
+    .lock-icon {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      filter: drop-shadow(0 0 5px #ff66cc);
     }
 
     #clock {
@@ -155,12 +205,6 @@
       animation: glowing-border 3s infinite alternate;
       box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6);
       width: 90%;
-    }
-
-    @media (min-width: 1024px) {
-      .board {
-        max-width: 800px;
-      }
     }
 
     @keyframes glowing-border {
@@ -201,7 +245,7 @@
     <div class="glow-wrapper">
       <div class="board">
         <img class="pfp" src="https://files.catbox.moe/o9ow7r.jpg" alt="Profile Picture">
-        <h2 class="wave-text">BRUH</h2>
+        <h2 class="glitch-text" data-text="BRUH">BRUH</h2>
         <p>Just chillin' on the internet...</p>
 
         <div class="social-icons">
@@ -210,9 +254,11 @@
           </a>
           <a href="https://twitter.com/yourusername" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
+            <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ffffff/lock--v1.png" alt="Locked">
           </a>
           <a href="https://instagram.com/yourusername" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
+            <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ffffff/lock--v1.png" alt="Locked">
           </a>
           <a href="https://open.spotify.com/user/yourspotify" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify">
