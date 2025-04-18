@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Me</title>
   <style>
-    /* # ---- Global styles ---- */
     body, html {
       height: 100%;
       margin: 0;
@@ -14,15 +13,13 @@
       background-size: cover;
       color: white;
       overflow: hidden;
-      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto; /* Main custom cursor */
+      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto;
     }
 
-    /* # ---- Cursor for links ---- */
     a:hover {
-      cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer; /* Hover cursor */
+      cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer;
     }
 
-    /* # ---- Intro (no blur, black background) ---- */
     #intro {
       position: fixed;
       top: 0; left: 0;
@@ -32,7 +29,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 999;
+      z-index: 1000;
       transition: opacity 1s ease;
     }
 
@@ -47,28 +44,28 @@
       transform: scale(1.1);
     }
 
-    /* # ---- Flash effect ---- */
     #flash {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
       background: white;
-      z-index: 1000;
+      z-index: 1500;
       opacity: 0;
       pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    /* # ---- Main content area ---- */
     #main-content {
       display: none;
       height: 100vh;
       width: 100vw;
       backdrop-filter: blur(10px);
       background: rgba(0, 0, 0, 0.5);
-      display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      z-index: 10;
     }
 
     .board {
@@ -90,7 +87,6 @@
       border: 2px solid white;
     }
 
-    /* # ---- Social icons ---- */
     .social-icons {
       display: flex;
       justify-content: center;
@@ -108,7 +104,6 @@
       transform: scale(1.2);
     }
 
-    /* # ---- Clock ---- */
     #clock {
       margin-top: 30px;
       font-size: 1.1rem;
@@ -131,25 +126,20 @@
 </head>
 <body>
 
-  <!-- # ---- Flash effect screen ---- -->
   <div id="flash"></div>
 
-  <!-- # ---- Intro with gun click ---- -->
   <div id="intro">
     <img id="gun-logo" src="https://files.catbox.moe/sz7bm8.gif" alt="Gun Logo">
   </div>
 
-  <!-- # ---- Gunshot sound ---- -->
   <audio id="gun-sound">
     <source src="https://files.catbox.moe/3tsaak.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- # ---- Background music ---- -->
   <audio id="bg-music" autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- # ---- Main content after gun click ---- -->
   <div id="main-content">
     <div class="board">
       <img class="pfp" src="your-pfp.png" alt="Profile Picture">
@@ -168,18 +158,45 @@
         </a>
       </div>
 
-      <!-- # ---- Local Time Display ---- -->
       <div id="clock">Loading time...</div>
     </div>
   </div>
 
-  <!-- # ---- JavaScript ---- -->
   <script>
     const gunLogo = document.getElementById('gun-logo');
     const intro = document.getElementById('intro');
-    const main = document.getElementById('main-content');
+    const mainContent = document.getElementById('main-content');
     const flash = document.getElementById('flash');
     const gunSound = document.getElementById('gun-sound');
-    const music = document.getElementById('bg-music');
+    const bgMusic = document.getElementById('bg-music');
 
-    gunLogo.addEvent
+    gunLogo.addEventListener('click', () => {
+      gunSound.play();
+      flash.style.opacity = '1';
+
+      setTimeout(() => {
+        flash.style.opacity = '0';
+        intro.classList.add('fade-out');
+
+        setTimeout(() => {
+          intro.style.display = 'none';
+          mainContent.style.display = 'flex';
+          document.body.style.overflow = 'auto';
+          bgMusic.play().catch(err => console.log('Music blocked by browser.'));
+        }, 1000);
+      }, 300);
+    });
+
+    function updateClock() {
+      const clock = document.getElementById('clock');
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: false });
+      clock.textContent = `Local Time: ${time}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>
