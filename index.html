@@ -6,6 +6,7 @@
   <title>About Me</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
+    /* ----------------------- GENERAL STYLING ----------------------- */
     body, html {
       cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto;
       height: 100%;
@@ -115,12 +116,8 @@
     }
 
     @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        opacity: 1;
-      }
-      20%, 22%, 24%, 55% {
-        opacity: 0.5;
-      }
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 22%, 24%, 55% { opacity: 0.5; }
     }
 
     @keyframes glitchTop {
@@ -139,6 +136,7 @@
       100% { clip: rect(0, 9999px, 0, 0); left: 0; }
     }
 
+    /* ---------------- SOCIAL ICONS ---------------- */
     .social-icons {
       display: flex;
       justify-content: center;
@@ -163,15 +161,31 @@
       filter: drop-shadow(0 0 15px #ffffff);
     }
 
+    /* 🔴 RED Lock Icon + Glow */
     .lock-icon {
       position: absolute;
       bottom: -6px;
       right: -6px;
       width: 18px;
       height: 18px;
-      filter: drop-shadow(0 0 5px #ff66cc);
+      filter: drop-shadow(0 0 5px red);
     }
 
+    /* 💥 Shake animation */
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-3px, 0); }
+      40% { transform: translate(3px, 0); }
+      60% { transform: translate(-3px, 0); }
+      80% { transform: translate(3px, 0); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+
+    /* ---------------- CLOCK ---------------- */
     #clock {
       margin-top: 30px;
       font-size: 2rem;
@@ -252,13 +266,13 @@
           <a href="https://discord.com/users/yourid" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord">
           </a>
-          <a href="https://twitter.com/yourusername" target="_blank">
+          <a href="#" class="locked">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
-            <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ffffff/lock--v1.png" alt="Locked">
+            <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ff0000/lock--v1.png" alt="Locked">
           </a>
-          <a href="https://instagram.com/yourusername" target="_blank">
+          <a href="#" class="locked">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
-            <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ffffff/lock--v1.png" alt="Locked">
+            <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ff0000/lock--v1.png" alt="Locked">
           </a>
           <a href="https://open.spotify.com/user/yourspotify" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify">
@@ -298,6 +312,7 @@
       }, 300);
     });
 
+    // ⏰ Clock Function
     function updateClock() {
       const clock = document.getElementById('clock');
       const now = new Date();
@@ -307,6 +322,16 @@
 
     setInterval(updateClock, 1000);
     updateClock();
+
+    // 🔒 Coming Soon Shake Effect
+    document.querySelectorAll('.social-icons a.locked').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        link.classList.add('shake');
+        alert("🔒 Coming soon");
+        setTimeout(() => link.classList.remove('shake'), 500);
+      });
+    });
   </script>
 
 </body>
