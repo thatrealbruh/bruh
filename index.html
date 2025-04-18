@@ -22,7 +22,7 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: black; /* Pure black background */
+      background: black;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,12 +104,19 @@
 
     /* # ---- Clock ---- */
     #clock {
-      margin-top: 20px;
-      font-size: 1rem;
-      color: #ccc;
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #0f0;
+      font-weight: bold;
+      background: black;
+      padding: 10px 15px;
+      display: inline-block;
+      border: 2px solid #0f0;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 5px #0f0;
     }
 
-    /* # ---- Transition fade class ---- */
     .fade-out {
       opacity: 0;
       pointer-events: none;
@@ -150,8 +157,8 @@
         <a href="https://twitter.com/yourusername" target="_blank">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
         </a>
-        <a href="https://twitch.tv/yourusername" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitch.png" alt="Twitch">
+        <a href="https://instagram.com/yourusername" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
         </a>
       </div>
 
@@ -169,7 +176,7 @@
     const gunSound = document.getElementById('gun-sound');
     const music = document.getElementById('bg-music');
 
-    // # ---- Gun click to reveal content ----
+    // Gun click to reveal content
     gunLogo.addEventListener('click', () => {
       gunSound.play();
       flash.style.opacity = '1';
@@ -187,12 +194,15 @@
       }, 300);
     });
 
-    // # ---- Clock updater ----
+    // Clock updater
     function updateClock() {
       const clock = document.getElementById('clock');
       const now = new Date();
-      const time = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Brunei' });
-      clock.textContent = `This is my current time zone now: ${time}`;
+      const time = now.toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Brunei',
+        hour12: false
+      });
+      clock.textContent = `Local Time (Brunei): ${time}`;
     }
 
     setInterval(updateClock, 1000);
