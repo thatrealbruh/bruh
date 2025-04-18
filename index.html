@@ -196,8 +196,7 @@
         0 0 10px #fff,
         0 0 20px #0ff,
         0 0 30px #0ff,
-        0 0 40px #0ff,
-        0 0 50px #0ff;
+        0 0 40px #0ff;
       animation: pulseClock 2s infinite ease-in-out;
     }
 
@@ -236,6 +235,65 @@
     .fade-out {
       opacity: 0;
       pointer-events: none;
+    }
+
+    /* ---------------- MOBILE STYLING ---------------- */
+    @media (max-width: 768px) {
+      .glitch-text {
+        font-size: 2rem;
+      }
+
+      .pfp {
+        width: 80px;
+        height: 80px;
+      }
+
+      .board {
+        padding: 20px;
+        width: 80%;
+      }
+
+      #clock {
+        font-size: 1.5rem;
+      }
+
+      .social-icons {
+        gap: 15px;
+      }
+
+      .social-icons img {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .glitch-text {
+        font-size: 1.5rem;
+      }
+
+      .pfp {
+        width: 70px;
+        height: 70px;
+      }
+
+      .board {
+        padding: 10px;
+        width: 90%;
+      }
+
+      .social-icons {
+        gap: 10px;
+      }
+
+      .social-icons img {
+        width: 24px;
+        height: 24px;
+      }
+
+      #clock {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
