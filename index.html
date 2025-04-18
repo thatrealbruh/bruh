@@ -309,14 +309,15 @@
     <source src="https://files.catbox.moe/3tsaak.mp3" type="audio/mpeg">
   </audio>
 
-  <audio id="bg-music" autoplay loop>
+  <!-- Background music will be preloaded but won't start until the logo is clicked -->
+  <audio id="bg-music">
     <source src="https://files.catbox.moe/l2ebcn.mp3" type="audio/mpeg">
   </audio>
 
   <div id="main-content">
     <div class="glow-wrapper">
       <div class="board">
-        <!-- Username section removed -->
+        <!-- Content (same as before) -->
         <img class="pfp" src="https://files.catbox.moe/o9ow7r.jpg" alt="Profile Picture">
         <p>Some souls are shadows, hidden in corners, never seen but always there</p>
 
@@ -332,15 +333,12 @@
             <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
             <img class="lock-icon" src="https://img.icons8.com/ios-glyphs/30/ff0000/lock--v1.png" alt="Locked">
           </a>
-          <a href="https://open.spotify.com/user/31vfxajtjzc7wttbtrrll4het6cm?si=0d5d102436924d04" target="_blank">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify">
-          </a>
-          <a href="https://steamcommunity.com/profiles/76561199797383260/" target="_blank">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/steam.png" alt="Steam">
+          <a href="https://twitter.com/psychic_vamp" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
           </a>
         </div>
 
-        <div id="clock"></div>
+        <div id="clock">00:00:00</div>
       </div>
     </div>
   </div>
@@ -354,13 +352,13 @@
     const music = document.getElementById('bg-music');
 
     gunLogo.addEventListener('click', () => {
-      gunSound.play();
+      gunSound.play();  // Play gun sound immediately when logo is clicked
       flash.style.opacity = '1';
 
       setTimeout(() => {
         flash.style.opacity = '0';
         intro.classList.add('fade-out');
-        music.play().catch(e => console.log("Music failed:", e));
+        music.play().catch(e => console.log("Music failed:", e));  // Play background music after the logo is clicked
 
         setTimeout(() => {
           intro.style.display = 'none';
