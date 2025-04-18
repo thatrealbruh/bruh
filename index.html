@@ -14,7 +14,12 @@
       background-size: cover;
       color: white;
       overflow: hidden;
-      cursor: url('https://files.catbox.moe/fgmqz6.cur'), pointer !important; /* Custom cursor */
+      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto; /* Main custom cursor */
+    }
+
+    /* # ---- Cursor for links ---- */
+    a:hover {
+      cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer; /* Hover cursor */
     }
 
     /* # ---- Intro (no blur, black background) ---- */
@@ -107,15 +112,15 @@
     #clock {
       margin-top: 30px;
       font-size: 1.1rem;
-      color: purple; /* Changed to purple */
+      color: purple;
       font-weight: bold;
       background: black;
       padding: 10px 15px;
       display: inline-block;
-      border: 2px solid purple; /* Changed to purple */
+      border: 2px solid purple;
       border-radius: 5px;
       font-family: 'Courier New', monospace;
-      text-shadow: 0 0 5px purple; /* Changed to purple */
+      text-shadow: 0 0 5px purple;
     }
 
     .fade-out {
@@ -177,37 +182,4 @@
     const gunSound = document.getElementById('gun-sound');
     const music = document.getElementById('bg-music');
 
-    // Gun click to reveal content
-    gunLogo.addEventListener('click', () => {
-      gunSound.play();
-      flash.style.opacity = '1';
-
-      setTimeout(() => {
-        flash.style.opacity = '0';
-        intro.classList.add('fade-out');
-        music.play().catch(e => console.log("Music failed:", e));
-
-        setTimeout(() => {
-          intro.style.display = 'none';
-          main.style.display = 'flex';
-          document.body.style.overflow = 'auto';
-        }, 1000);
-      }, 300);
-    });
-
-    // Clock updater
-    function updateClock() {
-      const clock = document.getElementById('clock');
-      const now = new Date();
-      const time = now.toLocaleTimeString('en-US', {
-        hour12: false
-      });
-      clock.textContent = `Local Time: ${time}`; // Removed country name
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
-
-</body>
-</html>
+    gunLogo.addEvent
