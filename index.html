@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     /* ---- Cursor styles ---- */
     body, html {
@@ -100,22 +101,34 @@
       width: 32px;
       height: 32px;
       transition: transform 0.2s ease;
-      filter: drop-shadow(0 0 5px #ff00ff);
+      filter: drop-shadow(0 0 5px #ffffff);
     }
 
     .social-icons a:hover img {
       transform: scale(1.2);
-      filter: drop-shadow(0 0 10px #ff66ff);
+      filter: drop-shadow(0 0 15px #ffffff);
     }
 
     /* ---- Clock ---- */
     #clock {
       margin-top: 30px;
-      font-size: 1.1rem;
-      color: white;
-      font-weight: bold;
-      font-family: 'Courier New', monospace;
-      text-shadow: 0 0 5px purple;
+      font-size: 2rem;
+      font-family: 'Orbitron', monospace;
+      color: #ffffff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #0ff,
+        0 0 30px #0ff,
+        0 0 40px #0ff,
+        0 0 50px #0ff;
+      animation: pulseClock 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseClock {
+      0% { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 20px #0ff; }
+      50% { text-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 40px #0ff; }
+      100% { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 20px #0ff; }
     }
 
     /* Glow effect for board */
