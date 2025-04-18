@@ -100,10 +100,12 @@
       width: 32px;
       height: 32px;
       transition: transform 0.2s ease;
+      filter: drop-shadow(0 0 5px #ff00ff);
     }
 
     .social-icons a:hover img {
       transform: scale(1.2);
+      filter: drop-shadow(0 0 10px #ff66ff);
     }
 
     /* ---- Clock ---- */
@@ -116,7 +118,7 @@
       text-shadow: 0 0 5px purple;
     }
 
-    /* Glow effect for content */
+    /* Glow effect for board */
     .board {
       position: relative;
       z-index: 1;
@@ -130,7 +132,6 @@
       box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6);
     }
 
-    /* Animation for glowing effect */
     @keyframes glowing-border {
       0% {
         box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6);
@@ -177,6 +178,7 @@
         <h2>@yourname</h2>
         <p>Just chillin' on the internet...</p>
 
+        <!-- Glowing Social Icons -->
         <div class="social-icons">
           <a href="https://discord.com/users/yourid" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord">
@@ -186,6 +188,12 @@
           </a>
           <a href="https://instagram.com/yourusername" target="_blank">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
+          </a>
+          <a href="https://open.spotify.com/user/yourspotify" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/spotify.png" alt="Spotify">
+          </a>
+          <a href="https://steamcommunity.com/id/yoursteam" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/steam.png" alt="Steam">
           </a>
         </div>
 
