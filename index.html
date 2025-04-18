@@ -90,7 +90,21 @@
       background: rgba(255, 255, 255, 0.1);
       text-align: center;
       backdrop-filter: blur(20px);
-      box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8); /* Glowing edge without rotation */
+      animation: glowing-border 3s infinite alternate; /* Adding animation */
+      box-shadow: 0 0 20px 10px rgba(128, 0, 128, 0.6), 0 0 30px 10px rgba(255, 0, 255, 0.6); /* Purple and pink glowing effect */
+    }
+
+    /* Animation for moving glowing effect */
+    @keyframes glowing-border {
+      0% {
+        box-shadow: 0 0 20px 10px rgba(128, 0, 128, 0.6), 0 0 30px 10px rgba(255, 0, 255, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 30px 10px rgba(255, 0, 255, 0.6), 0 0 40px 15px rgba(128, 0, 128, 0.8);
+      }
+      100% {
+        box-shadow: 0 0 40px 15px rgba(128, 0, 128, 0.8), 0 0 50px 20px rgba(255, 0, 255, 0.8);
+      }
     }
 
     .pfp {
