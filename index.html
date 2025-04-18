@@ -6,7 +6,6 @@
   <title>About Me</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
-    /* ----------------------- GENERAL STYLING ----------------------- */
     body, html {
       cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto;
       height: 100%;
@@ -20,6 +19,16 @@
 
     a:hover, #gun-logo:hover {
       cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
     #intro {
@@ -65,6 +74,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      z-index: 1;
     }
 
     .glow-wrapper {
@@ -136,7 +147,6 @@
       100% { clip: rect(0, 9999px, 0, 0); left: 0; }
     }
 
-    /* ---------------- SOCIAL ICONS ---------------- */
     .social-icons {
       display: flex;
       justify-content: center;
@@ -161,7 +171,6 @@
       filter: drop-shadow(0 0 15px #ffffff);
     }
 
-    /* 🔴 RED Lock Icon + Glow */
     .lock-icon {
       position: absolute;
       bottom: -6px;
@@ -171,7 +180,6 @@
       filter: drop-shadow(0 0 5px red);
     }
 
-    /* 💥 Shake animation */
     @keyframes shake {
       0% { transform: translate(0, 0); }
       20% { transform: translate(-3px, 0); }
@@ -185,7 +193,6 @@
       animation: shake 0.5s;
     }
 
-    /* ---------------- CLOCK ---------------- */
     #clock {
       margin-top: 30px;
       font-size: 2rem;
@@ -240,6 +247,8 @@
   </style>
 </head>
 <body>
+
+  <canvas id="particles"></canvas>
 
   <div id="flash"></div>
 
@@ -312,7 +321,6 @@
       }, 300);
     });
 
-    // ⏰ Clock Function
     function updateClock() {
       const clock = document.getElementById('clock');
       const now = new Date();
@@ -323,7 +331,6 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 🔒 Coming Soon Shake Effect
     document.querySelectorAll('.social-icons a.locked').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
@@ -332,6 +339,58 @@
         setTimeout(() => link.classList.remove('shake'), 500);
       });
     });
+
+    // ✨ Dust Particles
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const maxParticles = 70;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function createParticle() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.2,
+        speedY: (Math.random() - 0.5) * 0.2,
+        alpha: Math.random() * 0.5 + 0.3
+      };
+    }
+
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(createParticle());
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = 10;
+        ctx.fill();
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
+          Object.assign(p, createParticle());
+        }
+      }
+
+      requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
   </script>
 
 </body>
