@@ -80,18 +80,6 @@
       border-radius: 30px;
     }
 
-    .glow-wrapper::before {
-      content: '';
-      position: absolute;
-      top: -5px; left: -5px; right: -5px; bottom: -5px;
-      background: conic-gradient(from 0deg, purple, magenta, red, purple);
-      border-radius: 30px;
-      z-index: 0;
-      animation: spin 4s linear infinite;
-      filter: blur(10px);
-      pointer-events: none;
-    }
-
     /* Glow effect on the edge */
     .board {
       position: relative;
@@ -102,12 +90,7 @@
       background: rgba(255, 255, 255, 0.1);
       text-align: center;
       backdrop-filter: blur(20px);
-      box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8); /* Add glowing effect */
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8); /* Glowing edge without rotation */
     }
 
     .pfp {
