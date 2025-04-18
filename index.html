@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Me</title>
   <style>
-    /* # ---- Global cursor styles ---- */
+    /* ---- Cursor styles ---- */
     body, html {
       cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto;
     }
@@ -14,7 +14,7 @@
       cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer;
     }
 
-    /* # ---- Body and background ---- */
+    /* ---- Background ---- */
     body, html {
       height: 100%;
       margin: 0;
@@ -25,7 +25,7 @@
       overflow: hidden;
     }
 
-    /* # ---- Intro ---- */
+    /* ---- Intro screen ---- */
     #intro {
       position: fixed;
       top: 0; left: 0;
@@ -49,7 +49,7 @@
       transform: scale(1.1);
     }
 
-    /* # ---- Flash effect ---- */
+    /* ---- Flash effect ---- */
     #flash {
       position: fixed;
       top: 0; left: 0;
@@ -61,7 +61,7 @@
       pointer-events: none;
     }
 
-    /* # ---- Main content ---- */
+    /* ---- Main content ---- */
     #main-content {
       display: none;
       height: 100vh;
@@ -73,35 +73,40 @@
       justify-content: center;
     }
 
-    /* # ---- Glowing animated border ---- */
+    /* ---- Glow Wrapper ---- */
+    .glow-wrapper {
+      position: relative;
+      padding: 10px;
+      border-radius: 30px;
+    }
+
+    .glow-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: -5px; right: -5px; bottom: -5px;
+      background: conic-gradient(from 0deg, purple, magenta, red, purple);
+      border-radius: 30px;
+      z-index: 0;
+      animation: spin 4s linear infinite;
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ---- Board ---- */
     .board {
       position: relative;
+      z-index: 1;
       padding: 40px;
       border-radius: 20px;
       max-width: 500px;
       background: rgba(255, 255, 255, 0.1);
       text-align: center;
       backdrop-filter: blur(20px);
-      z-index: 1;
-    }
-
-    .board::before {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
-      border-radius: 24px;
-      background: conic-gradient(from 0deg, purple, magenta, red, purple);
-      z-index: -1;
-      animation: spin 4s linear infinite;
-      filter: blur(8px);
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
 
     .pfp {
@@ -112,7 +117,7 @@
       border: 2px solid white;
     }
 
-    /* # ---- Social icons ---- */
+    /* ---- Social icons ---- */
     .social-icons {
       display: flex;
       justify-content: center;
@@ -130,7 +135,7 @@
       transform: scale(1.2);
     }
 
-    /* # ---- Clock ---- */
+    /* ---- Clock ---- */
     #clock {
       margin-top: 30px;
       font-size: 1.1rem;
@@ -173,25 +178,27 @@
 
   <!-- Main Content -->
   <div id="main-content">
-    <div class="board">
-      <img class="pfp" src="your-pfp.png" alt="Profile Picture">
-      <h2>@yourname</h2>
-      <p>Just chillin' on the internet...</p>
+    <div class="glow-wrapper">
+      <div class="board">
+        <img class="pfp" src="your-pfp.png" alt="Profile Picture">
+        <h2>@yourname</h2>
+        <p>Just chillin' on the internet...</p>
 
-      <div class="social-icons">
-        <a href="https://discord.com/users/yourid" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord">
-        </a>
-        <a href="https://twitter.com/yourusername" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
-        </a>
-        <a href="https://instagram.com/yourusername" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
-        </a>
+        <div class="social-icons">
+          <a href="https://discord.com/users/yourid" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord">
+          </a>
+          <a href="https://twitter.com/yourusername" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter">
+          </a>
+          <a href="https://instagram.com/yourusername" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
+          </a>
+        </div>
+
+        <!-- Clock -->
+        <div id="clock">Loading time...</div>
       </div>
-
-      <!-- Clock -->
-      <div id="clock">Loading time...</div>
     </div>
   </div>
 
