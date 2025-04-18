@@ -91,19 +91,19 @@
       text-align: center;
       backdrop-filter: blur(20px);
       animation: glowing-border 3s infinite alternate; /* Adding animation */
-      box-shadow: 0 0 20px 10px rgba(128, 0, 128, 0.6), 0 0 30px 10px rgba(255, 0, 255, 0.6); /* Purple and pink glowing effect */
+      box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6); /* Smaller glowing effect */
     }
 
     /* Animation for moving glowing effect */
     @keyframes glowing-border {
       0% {
-        box-shadow: 0 0 20px 10px rgba(128, 0, 128, 0.6), 0 0 30px 10px rgba(255, 0, 255, 0.6);
+        box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6);
       }
       50% {
-        box-shadow: 0 0 30px 10px rgba(255, 0, 255, 0.6), 0 0 40px 15px rgba(128, 0, 128, 0.8);
+        box-shadow: 0 0 15px 5px rgba(255, 0, 255, 0.6), 0 0 20px 7px rgba(128, 0, 128, 0.8);
       }
       100% {
-        box-shadow: 0 0 40px 15px rgba(128, 0, 128, 0.8), 0 0 50px 20px rgba(255, 0, 255, 0.8);
+        box-shadow: 0 0 20px 7px rgba(128, 0, 128, 0.8), 0 0 25px 10px rgba(255, 0, 255, 0.8);
       }
     }
 
@@ -195,7 +195,7 @@
         </div>
 
         <!-- Clock -->
-        <div id="clock">Loading time...</div>
+        <div id="clock"></div>
       </div>
     </div>
   </div>
@@ -229,7 +229,7 @@
       const clock = document.getElementById('clock');
       const now = new Date();
       const time = now.toLocaleTimeString('en-US', { hour12: false });
-      clock.textContent = `Local Time: ${time}`;
+      clock.textContent = `${time}`;
     }
 
     setInterval(updateClock, 1000);
