@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Me</title>
   <style>
-    /* # ---- Global styles ---- */
-    * {
-      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto; /* Main custom cursor */
+    /* # ---- Global cursor styles ---- */
+    body, html {
+      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto;
     }
 
     a:hover, #gun-logo:hover {
-      cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer; /* Hover cursor */
+      cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer;
     }
 
+    /* # ---- Body and background ---- */
     body, html {
       height: 100%;
       margin: 0;
@@ -24,7 +25,7 @@
       overflow: hidden;
     }
 
-    /* # ---- Intro (no blur, black background) ---- */
+    /* # ---- Intro ---- */
     #intro {
       position: fixed;
       top: 0; left: 0;
@@ -60,7 +61,7 @@
       pointer-events: none;
     }
 
-    /* # ---- Main content area ---- */
+    /* # ---- Main content ---- */
     #main-content {
       display: none;
       height: 100vh;
@@ -72,15 +73,33 @@
       justify-content: center;
     }
 
+    /* # ---- Glowing animated border ---- */
     .board {
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid purple;
-      border-radius: 20px;
+      position: relative;
       padding: 40px;
-      text-align: center;
+      border-radius: 20px;
       max-width: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
       backdrop-filter: blur(20px);
-      box-shadow: 0 0 20px purple, 0 0 40px purple, 0 0 60px purple;
+      z-index: 1;
+    }
+
+    .board::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px;
+      right: -2px; bottom: -2px;
+      background: conic-gradient(purple, violet, purple, magenta, purple);
+      border-radius: 20px;
+      z-index: -1;
+      animation: spin 4s linear infinite;
+      filter: blur(5px);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .pfp {
@@ -132,25 +151,25 @@
 </head>
 <body>
 
-  <!-- # ---- Flash effect screen ---- -->
+  <!-- Flash screen -->
   <div id="flash"></div>
 
-  <!-- # ---- Intro with gun click ---- -->
+  <!-- Intro -->
   <div id="intro">
     <img id="gun-logo" src="https://files.catbox.moe/sz7bm8.gif" alt="Gun Logo">
   </div>
 
-  <!-- # ---- Gunshot sound ---- -->
+  <!-- Gunshot sound -->
   <audio id="gun-sound">
     <source src="https://files.catbox.moe/3tsaak.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- # ---- Background music ---- -->
+  <!-- Background music -->
   <audio id="bg-music" autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- # ---- Main content after gun click ---- -->
+  <!-- Main Content -->
   <div id="main-content">
     <div class="board">
       <img class="pfp" src="your-pfp.png" alt="Profile Picture">
@@ -169,12 +188,11 @@
         </a>
       </div>
 
-      <!-- # ---- Local Time Display ---- -->
+      <!-- Clock -->
       <div id="clock">Loading time...</div>
     </div>
   </div>
 
-  <!-- # ---- JavaScript ---- -->
   <script>
     const gunLogo = document.getElementById('gun-logo');
     const intro = document.getElementById('intro');
