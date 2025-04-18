@@ -54,7 +54,6 @@
       z-index: 1000;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 1s ease-out; /* Smoother transition */
     }
 
     #main-content {
@@ -162,6 +161,30 @@
       filter: drop-shadow(0 0 15px #ffffff);
     }
 
+    /* 🔴 RED Lock Icon + Glow */
+    .lock-icon {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      filter: drop-shadow(0 0 5px red);
+    }
+
+    /* 💥 Shake animation */
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-3px, 0); }
+      40% { transform: translate(3px, 0); }
+      60% { transform: translate(-3px, 0); }
+      80% { transform: translate(3px, 0); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+
     /* ---------------- CLOCK ---------------- */
     #clock {
       margin-top: 30px;
@@ -181,6 +204,32 @@
       0% { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 20px #0ff; }
       50% { text-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 40px #0ff; }
       100% { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 20px #0ff; }
+    }
+
+    .board {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      backdrop-filter: blur(20px);
+      animation: glowing-border 3s infinite alternate;
+      box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6);
+      width: 90%;
+    }
+
+    @keyframes glowing-border {
+      0% {
+        box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 0 0 15px 5px rgba(255, 0, 255, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 15px 5px rgba(255, 0, 255, 0.6), 0 0 20px 7px rgba(128, 0, 128, 0.8);
+      }
+      100% {
+        box-shadow: 0 0 20px 7px rgba(128, 0, 128, 0.8), 0 0 25px 10px rgba(255, 0, 255, 0.8);
+      }
     }
 
     .fade-out {
@@ -260,6 +309,7 @@
     <source src="https://files.catbox.moe/3tsaak.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Background music will be preloaded but won't start until the logo is clicked -->
   <audio id="bg-music">
     <source src="https://files.catbox.moe/l2ebcn.mp3" type="audio/mpeg">
   </audio>
@@ -302,23 +352,13 @@
     const music = document.getElementById('bg-music');
 
     gunLogo.addEventListener('click', () => {
-      gunSound.play(); // Play gun sound immediately when logo is clicked
+      gunSound.play();  // Play gun sound immediately when logo is clicked
       flash.style.opacity = '1';
-
-      // Gradually fade out the gun sound after a short period
-      let fadeOutTime = 4000; // Time before starting to fade out the sound
-      let fadeOutInterval = setInterval(() => {
-        if (gunSound.volume > 0) {
-          gunSound.volume -= 0.02; // Reduce volume gradually
-        } else {
-          clearInterval(fadeOutInterval); // Stop reducing volume once it's silent
-        }
-      }, 100);
 
       setTimeout(() => {
         flash.style.opacity = '0';
         intro.classList.add('fade-out');
-        music.play().catch(e => console.log("Music failed:", e)); // Play background music after the logo is clicked
+        music.play().catch(e => console.log("Music failed:", e));  // Play background music after the logo is clicked
 
         setTimeout(() => {
           intro.style.display = 'none';
