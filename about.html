@@ -5,41 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Me</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
+    body, html {
       height: 100%;
-      font-family: 'Courier New', monospace;
+      margin: 0;
+      font-family: monospace;
       background-color: black;
       color: white;
       overflow: hidden;
     }
 
     #intro {
-      position: absolute;
+      position: fixed;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       background: black;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      z-index: 1000;
       transition: opacity 1s ease;
-      z-index: 10;
     }
 
     #interact-btn {
-      padding: 20px 40px;
-      font-size: 1.5rem;
+      padding: 15px 30px;
+      font-size: 1.2rem;
       border: 2px solid white;
       background: transparent;
       color: white;
       cursor: pointer;
-      transition: all 0.3s ease;
+      margin-top: 20px;
     }
 
     #interact-btn:hover {
@@ -49,7 +45,7 @@
 
     #main-content {
       display: none;
-      padding: 40px;
+      padding: 2rem;
       text-align: center;
     }
 
@@ -60,38 +56,39 @@
   </style>
 </head>
 <body>
+
   <div id="intro">
-    <h1>Welcome.</h1>
+    <h1>🌌 Welcome to my site 🌌</h1>
     <p>Click to Interact</p>
     <button id="interact-btn">▶ Interact</button>
   </div>
 
   <audio id="bg-music" loop>
-    <source src="your-song.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
+    <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <div id="main-content">
-    <h2>✨ About Me ✨</h2>
-    <p>Hi, I'm [your name]! This is my cozy corner of the internet.</p>
-    <!-- Add your links, profile pic, whatever here -->
+    <h2>🧃 About Me 🧃</h2>
+    <p>Hi! I'm your cool retro self. This is my digital space.</p>
+    <!-- Add more content below -->
   </div>
 
   <script>
     const btn = document.getElementById('interact-btn');
     const intro = document.getElementById('intro');
-    const content = document.getElementById('main-content');
+    const main = document.getElementById('main-content');
     const music = document.getElementById('bg-music');
 
     btn.addEventListener('click', () => {
-      music.play();
+      music.play().catch(e => console.log("Music play failed:", e));
       intro.classList.add('fade-out');
       setTimeout(() => {
         intro.style.display = 'none';
-        content.style.display = 'block';
+        main.style.display = 'block';
         document.body.style.overflow = 'auto';
       }, 1000);
     });
   </script>
+
 </body>
 </html>
