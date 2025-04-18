@@ -6,6 +6,14 @@
   <title>About Me</title>
   <style>
     /* # ---- Global styles ---- */
+    * {
+      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto; /* Main custom cursor */
+    }
+
+    a:hover, #gun-logo:hover {
+      cursor: url('https://files.catbox.moe/kw2hdo.cur'), pointer; /* Hover cursor */
+    }
+
     body, html {
       height: 100%;
       margin: 0;
@@ -14,12 +22,6 @@
       background-size: cover;
       color: white;
       overflow: hidden;
-      cursor: url('https://files.catbox.moe/fgmqz6.cur'), auto; /* Main custom cursor */
-    }
-
-    /* # ---- Cursor for links ---- */
-    a:hover {
-      cursor: url('https://files.catbox.moe/hxf7kn.cur'), pointer; /* Hover cursor */
     }
 
     /* # ---- Intro (no blur, black background) ---- */
@@ -39,7 +41,6 @@
     #gun-logo {
       width: 100px;
       height: auto;
-      cursor: pointer;
       transition: transform 0.2s ease;
     }
 
@@ -73,13 +74,13 @@
 
     .board {
       background: rgba(255, 255, 255, 0.1);
-      border: 2px solid white;
+      border: 2px solid purple;
       border-radius: 20px;
       padding: 40px;
       text-align: center;
       max-width: 500px;
       backdrop-filter: blur(20px);
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px purple, 0 0 40px purple, 0 0 60px purple;
     }
 
     .pfp {
@@ -112,7 +113,7 @@
     #clock {
       margin-top: 30px;
       font-size: 1.1rem;
-      color: purple;
+      color: white;
       font-weight: bold;
       background: black;
       padding: 10px 15px;
