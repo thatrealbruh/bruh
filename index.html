@@ -106,15 +106,15 @@
     #clock {
       margin-top: 30px;
       font-size: 1.1rem;
-      color: #0f0;
+      color: purple; /* Changed to purple */
       font-weight: bold;
       background: black;
       padding: 10px 15px;
       display: inline-block;
-      border: 2px solid #0f0;
+      border: 2px solid purple; /* Changed to purple */
       border-radius: 5px;
       font-family: 'Courier New', monospace;
-      text-shadow: 0 0 5px #0f0;
+      text-shadow: 0 0 5px purple; /* Changed to purple */
     }
 
     .fade-out {
@@ -199,10 +199,9 @@
       const clock = document.getElementById('clock');
       const now = new Date();
       const time = now.toLocaleTimeString('en-US', {
-        timeZone: 'Asia/Brunei',
         hour12: false
       });
-      clock.textContent = `Local Time (Brunei): ${time}`;
+      clock.textContent = `Local Time: ${time}`; // Removed country name
     }
 
     setInterval(updateClock, 1000);
